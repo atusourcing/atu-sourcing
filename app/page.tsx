@@ -1,7 +1,9 @@
+"use client";
+
 export default function Page() {
   return (
     <div>
-      TEST PAGE
+      <h1>ATU Sourcing</h1>
     </div>
   );
 }
