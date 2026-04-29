@@ -395,6 +395,118 @@ export default function RussiaSourcingLandingPage() {
             </div>
           </section>
 
+
+
+          <section className="mx-auto max-w-6xl px-6 py-24" id="sectors">
+            <div className="mb-6 max-w-2xl">
+              <div className="text-[10px] font-semibold uppercase tracking-[0.26em] text-white/38">
+                Направления поставок
+              </div>
+
+              <h2 className="mt-4 text-[28px] font-medium tracking-[-0.04em] text-white md:text-[36px]">
+                Дефицитные компоненты и оптовые поставки
+              </h2>
+
+              <p className="mt-6 text-lg leading-8 text-white/58">
+                Работаем с оригинальными и аналоговыми позициями европейских и турецких
+                производителей (SKF, Bosch, ifm, WIKA и др.) через проверенные каналы
+                поставок.
+              </p>
+            </div>
+
+            <div className="mt-14 grid gap-5 md:grid-cols-2">
+              {[
+                {
+                  title: "Автомобильные компоненты",
+                  tint: "rgba(255,180,80,0.045)",
+                  border: "rgba(255,180,80,0.14)",
+                  items: [
+                    "Фильтры (MANN, Mahle и аналоги)",
+                    "NOx датчики (Bosch и аналоги)",
+                    "Топливные элементы и узлы (Bosch, Delphi)",
+                  ],
+                },
+                {
+                  title: "Промышленные компоненты",
+                  tint: "rgba(80,120,255,0.05)",
+                  border: "rgba(80,120,255,0.16)",
+                  items: [
+                    "Подшипники (SKF, FAG, NSK, Timken)",
+                    "Датчики (ifm, WIKA, Endress+Hauser)",
+                    "Энкодеры и реле (SICK, Phoenix Contact)",
+                  ],
+                },
+                {
+                  title: "Строительная химия",
+                  tint: "rgba(120,200,140,0.045)",
+                  border: "rgba(120,200,140,0.14)",
+                  items: [
+                    "Монтажная пена, клеи, герметики",
+                    "Производители из Турции и Европы (Akkim и др.)",
+                    "Поставки под оптовые задачи",
+                  ],
+                },
+                {
+                  title: "Механические узлы",
+                  tint: "rgba(200,200,200,0.035)",
+                  border: "rgba(255,255,255,0.12)",
+                  items: [
+                    "Приводные элементы и шарниры",
+                    "Полуоси и ступичные узлы",
+                    "Производители уровня GKN и аналоги",
+                  ],
+                },
+                {
+                  title: "Индивидуальные поставки",
+                  tint: "rgba(180,140,255,0.045)",
+                  border: "rgba(180,140,255,0.14)",
+                  items: [
+                    "Редкие и нестандартные позиции",
+                    "Поиск под конкретный запрос",
+                    "Проверка доступности и сроков",
+                  ],
+                },
+              ].map((sector) => (
+                <div
+                  key={sector.title}
+                  className="p-6"
+                  style={{
+                    border: `1px solid ${sector.border}`,
+                    background: `linear-gradient(180deg, ${sector.tint}, rgba(255,255,255,0.018))`,
+                  }}
+                >
+                  <div className="text-[13px] font-semibold uppercase tracking-[0.16em] text-[#E7E2D6]/78">
+                    {sector.title}
+                  </div>
+
+                  <ul className="mt-5 space-y-3">
+                    {sector.items.map((item) => (
+                      <li key={item} className="flex gap-3 text-sm leading-6 text-white/52">
+                        <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[#E7E2D6]/50" />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+
+            <div className="mt-16 border-t border-white/10 pt-10 text-center">
+              <p className="text-lg text-white/80">Не нашли нужную позицию?</p>
+
+              <p className="mt-2 text-white/50">
+                Оставьте запрос — проверим наличие и предложим решение.
+              </p>
+
+              <a
+                href="#request"
+                className="mt-6 inline-block border border-white/20 px-6 py-3 text-sm uppercase tracking-[0.12em] text-white/80 transition hover:border-white/40 hover:text-white"
+              >
+                Отправить запрос
+              </a>
+            </div>
+          </section>
+
           <section className="mx-auto max-w-6xl bg-[#151618]/60 px-6 py-24 backdrop-blur-[1px]">
             <div className="grid gap-10 md:grid-cols-[1.04fr_0.96fr]">
              <div className="relative overflow-hidden border border-white/10 bg-[linear-gradient(180deg,#1A1B1E_0%,#141517_100%)] p-8 md:p-10">
@@ -493,7 +605,32 @@ export default function RussiaSourcingLandingPage() {
                 </div>
 
                 <div className="border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.04),rgba(255,255,255,0.018))] p-6 shadow-[0_30px_100px_-50px_rgba(0,0,0,0.9)] md:p-8">
-                  <form className="space-y-5">
+                  <form
+  className="space-y-5"
+  onSubmit={async (e) => {
+    e.preventDefault();
+
+    const form = e.currentTarget;
+
+    const name = (form.querySelector('input[type="text"]') as HTMLInputElement)?.value;
+    const contact = (form.querySelector('input[type="email"]') as HTMLInputElement)?.value;
+    const message = (form.querySelector('textarea') as HTMLTextAreaElement)?.value;
+
+    await fetch("/api/telegram", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name,
+        contact,
+        message,
+      }),
+    });
+
+    alert("Заявка отправлена");
+  }}
+>
                     <div className="grid gap-5 sm:grid-cols-2">
                       <div>
                         <label className="mb-2 block text-sm font-medium text-white/72">
