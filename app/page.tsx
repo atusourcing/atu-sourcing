@@ -383,7 +383,7 @@ export default function RussiaSourcingLandingPage() {
                   ],
                 },
                 {
-                  title: "Индивидуальные поставки",
+                  title: "5. Индивидуальные поставки по запросу",
                   tint: "rgba(180,140,255,0.045)",
                   border: "rgba(180,140,255,0.14)",
                   items: [
@@ -558,7 +558,7 @@ export default function RussiaSourcingLandingPage() {
                     <div className="grid gap-5 sm:grid-cols-2">
                       <div>
                         <label className="mb-2 block text-sm font-medium text-white/72">
-                          Имя
+                          *Имя
                         </label>
                         <input
                           name="name"
@@ -570,7 +570,7 @@ export default function RussiaSourcingLandingPage() {
 
                       <div>
                         <label className="mb-2 block text-sm font-medium text-white/72">
-                          Компания
+                          *Компания
                         </label>
                         <input
                           name="company"
@@ -615,7 +615,7 @@ export default function RussiaSourcingLandingPage() {
                         name="message"
                         rows={5}
                         className="w-full border border-white/10 bg-white/[0.03] px-4 py-3 text-white outline-none transition duration-200 placeholder:text-white/25 focus:border-[#E7E2D6]/30 focus:bg-white/[0.05]"
-                        placeholder="Опишите ваш запрос"
+                        placeholder="Опишите ваш запрос. Укажите WhatsApp / телефон для более быстрого ответа"
                       />
                     </div>
 
@@ -642,7 +642,7 @@ export default function RussiaSourcingLandingPage() {
 
                   <div className="mt-5 text-center text-sm text-white/40">
                     Заявки рассматриваются индивидуально. Минимальные объемы
-                    обсуждаются после запроса.
+                    обсуждаются после обработки запроса.
                   </div>
                 </div>
               </div>
