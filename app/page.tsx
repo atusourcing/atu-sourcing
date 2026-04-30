@@ -628,9 +628,9 @@ export default function RussiaSourcingLandingPage() {
                     </button>
 
                     {formStatus === "success" ? (
-                      <div className="text-center text-sm text-[#E7E2D6]/80">
-                        Заявка отправлена. Мы свяжемся с вами после проверки запроса.
-                      </div>
+                     <div className="text-center text-sm text-green-400 bg-green-500/10 border border-green-500/20 px-4 py-3 rounded-xl">
+  ✅ Заявка отправлена. Мы свяжемся с вами после проверки запроса.
+</div>
                     ) : null}
 
                     {formStatus === "error" ? (
