@@ -18,7 +18,9 @@ export async function POST(req: Request) {
 Новая заявка с сайта ATU:
 
 Имя: ${body.name || "-"}
-Контакт: ${body.contact || "-"}
+Компания: ${body.company || "-"}
+Email: ${body.email || body.contact || "-"}
+Страна: ${body.country || "-"}
 Сообщение: ${body.message || "-"}
 `;
 
