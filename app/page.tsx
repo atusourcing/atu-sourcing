@@ -289,7 +289,7 @@ export default function RussiaSourcingLandingPage() {
                   Как мы работаем
                 </div>
                 <h2 className="mt-4 text-[28px] font-medium tracking-[-0.04em] text-white md:text-[36px]">
-                  Понятная схема без лишнего шума
+                  Понятная схема поставки без лишних звеньев
                 </h2>
               </div>
 
@@ -334,7 +334,7 @@ export default function RussiaSourcingLandingPage() {
               </h2>
 
               <p className="mt-6 text-lg leading-8 text-white/58">
-                Работаем с оригинальными и аналоговыми  OEM позициями европейских и
+                Как оператор поставок работаем с оригинальными и аналоговыми  OEM позициями европейских и
                 турецких производителей (SKF, Bosch, ifm, WIKA и др. ) через
                 проверенные каналы поставок.
               </p>
@@ -641,7 +641,7 @@ export default function RussiaSourcingLandingPage() {
                   </form>
 
                   <div className="mt-5 text-center text-sm text-white/40">
-                    Заявки рассматриваются индивидуально. Минимальные объемы
+                    Заявки рассматриваются индивидуально. Стоимость и варианты поставки
                     обсуждаются после обработки запроса.
                   </div>
                 </div>
