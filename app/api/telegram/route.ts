@@ -45,7 +45,7 @@ Email: ${body.email || body.contact || "-"}
       );
     }
 
-    return NextResponse.json({ ok: true });
+    return NextResponse.json({ success: true, ok: true });
   } catch (error) {
     console.error("API error:", error);
     return NextResponse.json({ error: "failed" }, { status: 500 });
