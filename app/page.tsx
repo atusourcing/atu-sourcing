@@ -1,59 +1,113 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { track } from "@vercel/analytics";
 
 export default function RussiaSourcingLandingPage() {
+  const requestRef = useRef<HTMLElement | null>(null);
+  const backgroundRef = useRef<HTMLDivElement | null>(null);
+
+  const [requestVisible, setRequestVisible] = useState(false);
+  const [backgroundReveal, setBackgroundReveal] = useState(0.12);
+  const [backgroundDrift, setBackgroundDrift] = useState(32);
+  const [isMobile, setIsMobile] = useState(false);
   const [formStatus, setFormStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
+
+  useEffect(() => {
+    const node = requestRef.current;
+    if (!node || typeof IntersectionObserver === "undefined") return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setRequestVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.18 }
+    );
+
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      if (typeof window !== "undefined") {
+        setIsMobile(window.innerWidth < 768);
+      }
+    };
+
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+
+    let frameId = 0;
+
+    const updateBackground = () => {
+      const node = backgroundRef.current;
+      if (!node) return;
+
+      const rect = node.getBoundingClientRect();
+      const windowHeight = window.innerHeight || 1;
+      const startOffset = windowHeight * 1.15;
+      const progress = 1 - Math.min(Math.max(rect.top / startOffset, 0), 1);
+      const eased = Math.min(Math.max(progress * 1.35, 0), 1);
+
+      setBackgroundReveal(0.12 + eased * 0.3);
+      setBackgroundDrift(32 - eased * 54);
+      frameId = 0;
+    };
+
+    const handleScroll = () => {
+      if (frameId) return;
+      frameId = window.requestAnimationFrame(updateBackground);
+    };
+
+    updateBackground();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("resize", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleScroll);
+      window.removeEventListener("resize", checkMobile);
+      if (frameId) window.cancelAnimationFrame(frameId);
+    };
+  }, []);
+
+  const backgroundStyle = {
+    width: isMobile ? "88vw" : "76vw",
+    maxWidth: isMobile ? "820px" : "1600px",
+    opacity: isMobile ? 0.32 : 0.22 + backgroundReveal * 0.42,
+    transform: isMobile
+      ? "translate3d(0,0,0) scale(1)"
+      : `translate3d(0, ${backgroundDrift}px, 0) scale(${
+          1.02 - backgroundReveal * 0.01
+        })`,
+    filter: isMobile
+      ? "brightness(0.82) contrast(1.05)"
+      : `brightness(${0.72 + backgroundReveal * 0.32}) contrast(1.05) blur(${(1 - backgroundReveal) * 1.2}px)`,
+    willChange: "transform, opacity",
+  } as const;
+
+  const overlayStyle = {
+    background: `linear-gradient(180deg, rgba(18,19,21,${
+      0.82 - backgroundReveal * 0.22
+    }), rgba(18,19,21,${0.9 - backgroundReveal * 0.12}))`,
+  } as const;
+
+  const requestOverlayStyle = {
+    opacity: requestVisible ? 0.7 : 0.8,
+  } as const;
+
+  const requestContentStyle = {
+    opacity: requestVisible ? 1 : 0.7,
+    transform: requestVisible ? "translateY(0px)" : "translateY(18px)",
+  } as const;
 
   return (
     <div className="min-h-screen bg-[#121315] text-[#F5F5F2] selection:bg-white/20">
-      <style>{`
-        html { scroll-behavior: smooth; }
-
-        @keyframes safeContainerReveal {
-          from {
-            opacity: 0.08;
-            transform: translate3d(0, 34px, 0) scale(1.025);
-            filter: brightness(0.68) contrast(1.05) blur(1.2px);
-          }
-          to {
-            opacity: 0.34;
-            transform: translate3d(0, -8px, 0) scale(1.01);
-            filter: brightness(0.92) contrast(1.05) blur(0px);
-          }
-        }
-
-        @keyframes safeSlowFloat {
-          0%, 100% { transform: translate3d(0, -8px, 0) scale(1.01); }
-          50% { transform: translate3d(0, -20px, 0) scale(1.012); }
-        }
-
-        @keyframes safeSoftAppear {
-          from { opacity: 0.72; transform: translateY(14px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-
-        .safe-container-image {
-          width: min(76vw, 1600px);
-          animation: safeContainerReveal 1200ms ease-out both, safeSlowFloat 9s ease-in-out 1200ms infinite;
-          will-change: transform, opacity;
-        }
-
-        .safe-request-appear {
-          animation: safeSoftAppear 700ms ease-out both;
-        }
-
-        @media (max-width: 767px) {
-          .safe-container-image {
-            width: min(88vw, 820px);
-            opacity: 0.24 !important;
-            animation: safeContainerReveal 900ms ease-out both;
-          }
-        }
-      `}</style>
-
-      <div className="pointer-events-none fixed inset-0 opacity-[0.065] mix-blend-overlay bg-[url('/noise.png')]" />
-
+      <div className="pointer-events-none fixed inset-0 opacity-[0.065] mix-blend-overlay bg-[url('/noise.png')]"></div>
       <section className="relative overflow-hidden border-b border-white/10 bg-[linear-gradient(180deg,#151618_0%,#121315_100%)]">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.08),transparent_28%),radial-gradient(circle_at_20%_20%,rgba(255,255,255,0.04),transparent_22%)]" />
 
@@ -91,12 +145,13 @@ export default function RussiaSourcingLandingPage() {
 
               <p className="mt-7 max-w-xl text-lg leading-8 text-white/72 md:text-[21px]">
                 Работаем с производителями и международными поставщиками,
-                организуя поставки для компаний России и стран СНГ.
+организуя поставки для компаний России и стран СНГ.
               </p>
 
               <p className="mt-4 max-w-xl text-[15px] leading-7 text-white/42">
-                Доступ к заводам-производителям и международным поставщикам.
-                Подбор поставщика под ключ. Сопровождение поставки до отгрузки.
+                Доступ к заводам-производителям и международным
+                поставщикам. Подбор поставщика под ключ.
+                Сопровождение поставки до отгрузки.
               </p>
 
               <div className="mt-10 flex flex-col gap-4 sm:flex-row">
@@ -121,17 +176,25 @@ export default function RussiaSourcingLandingPage() {
                     "Прямой доступ",
                     "Работаем с действующими фабриками и производственными предприятиями.",
                   ],
-                  ["Маршруты поставки", "Выстраиваем рабочую логистическую схему."],
+                  [
+                    "Маршруты поставки",
+                    "Выстраиваем рабочую логистическую схему.",
+                  ],
                   [
                     "Индивидуальный подход",
                     "Каждый запрос рассматриваются и прорабатываются вручную.",
                   ],
                 ].map(([title, text]) => (
-                  <div key={title} className="border-l border-[#E7E2D6]/20 pl-4">
+                  <div
+                    key={title}
+                    className="border-l border-[#E7E2D6]/20 pl-4"
+                  >
                     <div className="text-[12px] font-semibold uppercase tracking-[0.16em] text-[#E7E2D6]/78">
                       {title}
                     </div>
-                    <div className="mt-3 text-sm leading-6 text-white/50">{text}</div>
+                    <div className="mt-3 text-sm leading-6 text-white/50">
+                      {text}
+                    </div>
                   </div>
                 ))}
               </div>
@@ -187,7 +250,9 @@ export default function RussiaSourcingLandingPage() {
                           </div>
                         ) : null}
                         <div
-                          className={`${title ? "mt-1" : "mt-0"} text-sm leading-6 text-white/50`}
+                          className={`${
+                            title ? "mt-1" : "mt-0"
+                          } text-sm leading-6 text-white/50`}
                         >
                           {text}
                         </div>
@@ -206,18 +271,22 @@ export default function RussiaSourcingLandingPage() {
         </div>
       </section>
 
-      <div className="relative">
+      <div ref={backgroundRef} className="relative">
         <div className="pointer-events-none absolute inset-0 overflow-hidden">
           <div className="sticky top-0 h-screen">
-            <div className="absolute inset-0 flex items-center justify-center overflow-hidden">
+            <div className="absolute inset-0 flex items-center justify-center overflow-hidden transition-all duration-300">
               <img
                 src="/container-bg.png"
                 alt=""
                 aria-hidden="true"
-                className="safe-container-image pointer-events-none select-none grayscale object-contain"
+                className="pointer-events-none select-none grayscale object-contain transition-all duration-300"
+                style={backgroundStyle}
               />
             </div>
-            <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(18,19,21,0.72),rgba(18,19,21,0.82))]" />
+            <div
+              className="absolute inset-0 transition-all duration-300"
+              style={overlayStyle}
+            />
           </div>
         </div>
 
@@ -261,7 +330,9 @@ export default function RussiaSourcingLandingPage() {
                     <div className="text-[12px] font-semibold uppercase tracking-[0.16em] text-[#E7E2D6]/78">
                       {title}
                     </div>
-                    <div className="mt-3 text-sm leading-6 text-white/50">{text}</div>
+                    <div className="mt-3 text-sm leading-6 text-white/50">
+                      {text}
+                    </div>
                   </div>
                 ))}
               </div>
@@ -314,166 +385,64 @@ export default function RussiaSourcingLandingPage() {
                     <div className="text-[12px] font-semibold uppercase tracking-[0.16em] text-[#E7E2D6]/78">
                       {step}
                     </div>
-                    <div className="mt-4 text-xl font-semibold text-white/90">{title}</div>
-                    <div className="mt-3 text-sm leading-6 text-white/50">{text}</div>
+                    <div className="mt-4 text-xl font-semibold text-white/90">
+                      {title}
+                    </div>
+                    <div className="mt-3 text-sm leading-6 text-white/50">
+                      {text}
+                    </div>
                   </div>
                 ))}
               </div>
             </div>
           </section>
 
-          <section className="mx-auto max-w-6xl px-6 py-24" id="sectors">
-            <div className="mb-6 max-w-2xl">
-              <div className="text-[10px] font-semibold uppercase tracking-[0.26em] text-white/38">
-                Направления поставок
-              </div>
-
-              <h2 className="mt-4 text-[28px] font-medium tracking-[-0.04em] text-white md:text-[36px]">
-                Дефицитные компоненты и оптовые поставки
-              </h2>
-
-              <p className="mt-6 text-lg leading-8 text-white/58">
-                Работаем с оригинальными и аналоговыми позициями европейских и
-                турецких производителей (SKF, Bosch, ifm, WIKA и др.) через
-                проверенные каналы поставок.
-              </p>
-            </div>
-
-            <div className="mt-14 grid gap-5 md:grid-cols-2">
-              {[
-                {
-                  title: "Автомобильные компоненты",
-                  tint: "rgba(255,180,80,0.045)",
-                  border: "rgba(255,180,80,0.14)",
-                  items: [
-                    "Фильтры (MANN, Mahle и аналоги)",
-                    "NOx датчики (Bosch и аналоги)",
-                    "Топливные элементы и узлы (Bosch, Delphi)",
-                  ],
-                },
-                {
-                  title: "Промышленные компоненты",
-                  tint: "rgba(80,120,255,0.05)",
-                  border: "rgba(80,120,255,0.16)",
-                  items: [
-                    "Подшипники (SKF, FAG, NSK, Timken)",
-                    "Датчики (ifm, WIKA, Endress+Hauser)",
-                    "Энкодеры и реле (SICK, Phoenix Contact)",
-                  ],
-                },
-                {
-                  title: "Строительная химия",
-                  tint: "rgba(120,200,140,0.045)",
-                  border: "rgba(120,200,140,0.14)",
-                  items: [
-                    "Монтажная пена, клеи, герметики",
-                    "Производители из Турции и Европы (Akkim и др.)",
-                    "Поставки под оптовые задачи",
-                  ],
-                },
-                {
-                  title: "Механические узлы",
-                  tint: "rgba(200,200,200,0.035)",
-                  border: "rgba(255,255,255,0.12)",
-                  items: [
-                    "Приводные элементы и шарниры",
-                    "Полуоси и ступичные узлы",
-                    "Производители уровня GKN и аналоги",
-                  ],
-                },
-                {
-                  title: "Индивидуальные поставки",
-                  tint: "rgba(180,140,255,0.045)",
-                  border: "rgba(180,140,255,0.14)",
-                  items: [
-                    "Редкие и нестандартные позиции",
-                    "Поиск под конкретный запрос",
-                    "Проверка доступности и сроков",
-                  ],
-                },
-              ].map((sector) => (
-                <div
-                  key={sector.title}
-                  className="p-6"
-                  style={{
-                    border: `1px solid ${sector.border}`,
-                    background: `linear-gradient(180deg, ${sector.tint}, rgba(255,255,255,0.018))`,
-                  }}
-                >
-                  <div className="text-[13px] font-semibold uppercase tracking-[0.16em] text-[#E7E2D6]/78">
-                    {sector.title}
-                  </div>
-
-                  <ul className="mt-5 space-y-3">
-                    {sector.items.map((item) => (
-                      <li key={item} className="flex gap-3 text-sm leading-6 text-white/52">
-                        <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[#E7E2D6]/50" />
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
-            </div>
-
-            <div className="mt-16 border-t border-white/10 pt-10 text-center">
-              <p className="text-lg text-white/80">Не нашли нужную позицию?</p>
-
-              <p className="mt-2 text-white/50">
-                Оставьте запрос — проверим наличие и предложим решение.
-              </p>
-
-              <a
-                href="#request"
-                className="mt-6 inline-block border border-white/20 px-6 py-3 text-sm uppercase tracking-[0.12em] text-white/80 transition hover:border-white/40 hover:text-white"
-              >
-                Отправить запрос
-              </a>
-            </div>
-          </section>
-
           <section className="mx-auto max-w-6xl bg-[#151618]/60 px-6 py-24 backdrop-blur-[1px]">
             <div className="grid gap-10 md:grid-cols-[1.04fr_0.96fr]">
-              <div className="relative overflow-hidden border border-white/10 bg-[linear-gradient(180deg,#1A1B1E_0%,#141517_100%)] p-8 md:p-10">
-                <div className="pointer-events-none absolute inset-0">
-                  <img
-                    src="/cargo-ship.png"
-                    alt=""
-                    aria-hidden="true"
-                    className="h-full w-full object-cover grayscale opacity-[0.29]"
-                  />
-                  <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(20,21,23,0.62),rgba(20,21,23,0.82))]" />
-                </div>
+             <div className="relative overflow-hidden border border-white/10 bg-[linear-gradient(180deg,#1A1B1E_0%,#141517_100%)] p-8 md:p-10">
 
-                <div className="relative">
-                  <h2 className="mt-4 text-[28px] font-medium tracking-[-0.04em] text-white md:text-[36px]">
-                    Сильная производственная база и удобная логистика
-                  </h2>
+  {/* ship background */}
+  <div className="pointer-events-none absolute inset-0">
+    <img
+      src="/cargo-ship.png"
+      alt=""
+      aria-hidden="true"
+      className="h-full w-full object-cover grayscale opacity-[0.29]"
+    />
+    <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(20,21,23,0.62),rgba(20,21,23,0.82))]" />
+  </div>
+                <h2 className="mt-4 text-[28px] font-medium tracking-[-0.04em] text-white md:text-[36px]">
+                  Сильная производственная база и удобная логистика
+                </h2>
 
-                  <div className="mt-10 grid gap-8 sm:grid-cols-2">
-                    {[
-                      [
-                        "Развитая база",
-                        "Сильная промышленная инфраструктура и опыт работы с экспортными поставками.",
-                      ],
-                      [
-                        "Гибкость",
-                        "Возможность выстраивать формат сотрудничества под конкретную задачу.",
-                      ],
-                      ["Маршруты", "Удобная география и рабочие логистические направления."],
-                      [
-                        "Цена",
-                        "Конкурентная стоимость при сохранении делового уровня исполнения.",
-                      ],
-                    ].map(([title, text]) => (
-                      <div key={title} className="border-l border-white/10 pl-4">
-                        <div className="text-[12px] font-semibold uppercase tracking-[0.16em] text-[#E7E2D6]/78">
-                          {title}
-                        </div>
-                        <div className="mt-3 text-sm leading-6 text-white/50">{text}</div>
+                <div className="mt-10 grid gap-8 sm:grid-cols-2">
+                  {[
+                    [
+                      "Развитая база",
+                      "Сильная промышленная инфраструктура и опыт работы с экспортными поставками.",
+                    ],
+                    [
+                      "Гибкость",
+                      "Возможность выстраивать формат сотрудничества под конкретную задачу.",
+                    ],
+                    [
+                      "Маршруты",
+                      "Удобная география и рабочие логистические направления.",
+                    ],
+                    [
+                      "Цена",
+                      "Конкурентная стоимость при сохранении делового уровня исполнения.",
+                    ],
+                  ].map(([title, text]) => (
+                    <div key={title} className="border-l border-white/10 pl-4">
+                      <div className="text-[12px] font-semibold uppercase tracking-[0.16em] text-[#E7E2D6]/78">
+                        {title}
                       </div>
-                    ))}
-                  </div>
+                      <div className="mt-3 text-sm leading-6 text-white/50">
+                        {text}
+                      </div>
+                    </div>
+                  ))}
                 </div>
               </div>
 
@@ -485,8 +454,9 @@ export default function RussiaSourcingLandingPage() {
                   Турция — производство / хаб. Россия/СНГ — поставка.
                 </h2>
                 <p className="mt-6 text-base leading-7 text-white/56">
-                  Мы организуем поставки между Турцией и Россией через проверенные
-                  маршруты и работаем только по реальным деловым запросам.
+                  Мы организуем поставки между Турцией и Россией через
+                  проверенные маршруты и работаем только по реальным деловым
+                  запросам.
                 </p>
                 <div className="mt-10 border-t border-white/10 pt-5 text-sm leading-6 text-white/50">
                   Минимальные объемы поставок обсуждаются индивидуально.
@@ -494,14 +464,22 @@ export default function RussiaSourcingLandingPage() {
               </div>
             </div>
           </section>
+          
 
           <section
+            ref={requestRef}
             className="relative border-t border-white/10 bg-[#17181A]/72 backdrop-blur-[2px]"
             id="request"
           >
-            <div className="absolute inset-0 bg-[#17181A]/70" />
+            <div
+              className="absolute inset-0 bg-[#17181A]/72 transition-opacity duration-1000"
+              style={requestOverlayStyle}
+            />
 
-            <div className="safe-request-appear relative mx-auto max-w-6xl px-6 py-24">
+            <div
+              className="relative mx-auto max-w-6xl px-6 py-24 transition-all duration-1000"
+              style={requestContentStyle}
+            >
               <div className="grid gap-12 md:grid-cols-[0.88fr_1.12fr]">
                 <div>
                   <div className="text-[10px] font-semibold uppercase tracking-[0.26em] text-white/38">
@@ -524,18 +502,27 @@ export default function RussiaSourcingLandingPage() {
                       setFormStatus("sending");
 
                       const form = e.currentTarget;
-                      const formData = new FormData(form);
+                      const inputs = form.querySelectorAll("input");
+
+                      const name = (inputs[0] as HTMLInputElement)?.value || "";
+                      const company = (inputs[1] as HTMLInputElement)?.value || "";
+                      const email = (inputs[2] as HTMLInputElement)?.value || "";
+                      const country = (inputs[3] as HTMLInputElement)?.value || "";
+                      const message =
+                        (form.querySelector("textarea") as HTMLTextAreaElement)?.value || "";
 
                       try {
                         const res = await fetch("/api/telegram", {
                           method: "POST",
-                          headers: { "Content-Type": "application/json" },
+                          headers: {
+                            "Content-Type": "application/json",
+                          },
                           body: JSON.stringify({
-                            name: formData.get("name"),
-                            company: formData.get("company"),
-                            email: formData.get("email"),
-                            country: formData.get("country"),
-                            message: formData.get("message"),
+                            name,
+                            company,
+                            email,
+                            country,
+                            message,
                           }),
                         });
 
@@ -543,9 +530,13 @@ export default function RussiaSourcingLandingPage() {
                           throw new Error("Send failed");
                         }
 
+                        track("form_submit", {
+                          source: "landing",
+                        });
+
                         setFormStatus("success");
                         form.reset();
-                      } catch (error) {
+                      } catch {
                         setFormStatus("error");
                       }
                     }}
@@ -638,15 +629,15 @@ export default function RussiaSourcingLandingPage() {
                   <div className="mt-5 text-center text-sm text-white/40">
                     Заявки рассматриваются индивидуально. Минимальные объемы
                     обсуждаются после запроса.
+                    
                   </div>
                 </div>
               </div>
             </div>
           </section>
-
           <footer className="border-t border-white/10 py-8 text-center text-[11px] uppercase tracking-[0.2em] text-white/30">
-            ATU Sourcing · Operating from Türkiye
-          </footer>
+  ATU Sourcing · Operating from Türkiye
+</footer>
         </div>
       </div>
     </div>
