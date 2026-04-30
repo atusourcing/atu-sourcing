@@ -296,12 +296,12 @@ export default function RussiaSourcingLandingPage() {
               <div className="mt-14 grid gap-8 md:grid-cols-3">
                 {[
                   [
-                    "01",
+                    "01 >",
                     "Запрос",
                     "Вы отправляете краткое описание запроса, формата сотрудничества и ожидаемого объема.",
                   ],
                   [
-                    "02",
+                    "02 >",
                     "Подбор фабрики",
                     "Мы подбираем производителя и выстраиваем рабочую схему поставки.",
                   ],
@@ -343,7 +343,7 @@ export default function RussiaSourcingLandingPage() {
             <div className="mt-14 grid gap-5 md:grid-cols-2">
               {[
                 {
-                  title: "Автомобильные компоненты",
+                  title: "1. Автомобильные компоненты",
                   tint: "rgba(255,180,80,0.045)",
                   border: "rgba(255,180,80,0.14)",
                   items: [
@@ -353,7 +353,7 @@ export default function RussiaSourcingLandingPage() {
                   ],
                 },
                 {
-                  title: "Промышленные компоненты",
+                  title: "2. Промышленные компоненты",
                   tint: "rgba(80,120,255,0.05)",
                   border: "rgba(80,120,255,0.16)",
                   items: [
@@ -363,7 +363,7 @@ export default function RussiaSourcingLandingPage() {
                   ],
                 },
                 {
-                  title: "Строительная химия",
+                  title: "3. Строительная химия",
                   tint: "rgba(120,200,140,0.045)",
                   border: "rgba(120,200,140,0.14)",
                   items: [
@@ -373,7 +373,7 @@ export default function RussiaSourcingLandingPage() {
                   ],
                 },
                 {
-                  title: "Механические узлы",
+                  title: "4. Механические узлы",
                   tint: "rgba(200,200,200,0.035)",
                   border: "rgba(255,255,255,0.12)",
                   items: [
