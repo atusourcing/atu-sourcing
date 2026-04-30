@@ -274,7 +274,7 @@ export default function RussiaSourcingLandingPage() {
               <div className="flex items-center gap-6 tracking-[0.12em] text-[11px] uppercase">
                 <span>Находимся в Турции</span>
                 <span className="opacity-40">•</span>
-                <span>на рынке с 2020 года</span>
+                <span>Работаем с 2020 года</span>
               </div>
             </div>
           </section>
@@ -334,7 +334,7 @@ export default function RussiaSourcingLandingPage() {
               </h2>
 
               <p className="mt-6 text-lg leading-8 text-white/58">
-                Работаем с оригинальными и аналоговыми позициями европейских и
+                Работаем с оригинальными и аналоговыми  OEM позициями европейских и
                 турецких производителей (SKF, Bosch, ifm, WIKA и др. ) через
                 проверенные каналы поставок.
               </p>
@@ -455,13 +455,13 @@ export default function RussiaSourcingLandingPage() {
                     {[
                       [
                         "Развитая база",
-                        "Сильная промышленная инфраструктура и опыт работы с экспортными поставками.",
+                        "Свои складские помещения в Турции и Англии и опыт работы с экспортными поставками.",
                       ],
                       [
                         "Гибкость",
                         "Возможность выстраивать формат сотрудничества под конкретную задачу.",
                       ],
-                      ["Маршруты", "Удобная география и рабочие логистические направления."],
+                      ["Конфиденциальность", "Мы не разглашаем детали сделок и контрагентов."],
                       [
                         "Цена",
                         "Конкурентная стоимость при сохранении делового уровня исполнения.",
@@ -490,7 +490,7 @@ export default function RussiaSourcingLandingPage() {
                   маршруты и работаем только по реальным деловым запросам.
                 </p>
                 <div className="mt-10 border-t border-white/10 pt-5 text-sm leading-6 text-white/50">
-                  Минимальные объемы поставок обсуждаются индивидуально.
+                  Каналы поставок обсуждаются индивидуально.
                 </div>
               </div>
             </div>
@@ -558,7 +558,7 @@ export default function RussiaSourcingLandingPage() {
                     <div className="grid gap-5 sm:grid-cols-2">
                       <div>
                         <label className="mb-2 block text-sm font-medium text-white/72">
-                          *Имя
+                          Имя
                         </label>
                         <input
                           name="name"
@@ -570,7 +570,7 @@ export default function RussiaSourcingLandingPage() {
 
                       <div>
                         <label className="mb-2 block text-sm font-medium text-white/72">
-                          *Компания
+                          Компания
                         </label>
                         <input
                           name="company"
