@@ -424,12 +424,12 @@ export default function RussiaSourcingLandingPage() {
                 Оставьте запрос — проверим наличие и предложим решение.
               </p>
 
-              <a
-                href="#request"
-                className="mt-6 inline-block border border-white/20 px-6 py-3 text-sm uppercase tracking-[0.12em] text-white/80 transition hover:border-white/40 hover:text-white"
-              >
-                Отправить запрос
-              </a>
+             <a
+  href="#request"
+  className="mt-6 inline-flex items-center justify-center rounded-2xl border border-white/20 px-6 py-3 text-sm font-medium text-white/80 transition duration-200 hover:border-white/40 hover:text-white hover:bg-white/[0.04]"
+>
+  Получить предложение
+</a>
             </div>
           </section>
 
