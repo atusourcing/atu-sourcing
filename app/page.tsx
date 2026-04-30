@@ -62,7 +62,7 @@ export default function RussiaSourcingLandingPage() {
           <div className="flex items-center justify-between">
             <div>
               <div className="text-[12px] font-semibold uppercase tracking-[0.32em] text-white/60">
-                ATU SOURCING
+                ATU SOURCING | Оператор поставок
               </div>
               <div className="mt-2 text-[10px] uppercase tracking-[0.4em] text-white/35">
                 <span className="text-white/50">RU</span>
@@ -207,28 +207,6 @@ export default function RussiaSourcingLandingPage() {
         </div>
       </section>
 
-      <section className="border-b border-white/10 bg-[#141517]">
-        <div className="mx-auto max-w-6xl px-6 py-6">
-          <div className="grid gap-5 text-[12px] leading-5 text-white/48 md:grid-cols-5">
-            <div className="border-l border-[#E7E2D6]/18 pl-3">
-              Собственные складские мощности в Турции и Англии
-            </div>
-            <div className="border-l border-[#E7E2D6]/18 pl-3">
-              Работаем с 2020 года
-            </div>
-            <div className="border-l border-[#E7E2D6]/18 pl-3">
-              Только целевые запросы и ограниченное число проектов
-            </div>
-            <div className="border-l border-[#E7E2D6]/18 pl-3">
-              Промышленные и оптовые объёмы
-            </div>
-            <div className="border-l border-[#E7E2D6]/18 pl-3">
-              Прямые рабочие контакты с производственными предприятиями
-            </div>
-          </div>
-        </div>
-      </section>
-
       <div className="relative">
         <div className="pointer-events-none absolute inset-0 overflow-hidden">
           <div className="sticky top-0 h-screen">
@@ -249,34 +227,35 @@ export default function RussiaSourcingLandingPage() {
             <div className="grid gap-12 md:grid-cols-[0.92fr_1.08fr]">
               <div>
                 <div className="text-[10px] font-semibold uppercase tracking-[0.26em] text-white/38">
-                  Контроль
+                  О нас
                 </div>
                 <h2 className="mt-4 text-[28px] font-medium tracking-[-0.04em] text-white md:text-[36px]">
-                  Контроль поставки на каждом этапе
+                  Глубокий анализ и системный подход
                 </h2>
                 <p className="mt-6 max-w-xl text-lg leading-8 text-white/60">
-                  Мы не просто ищем товар. Проверяем доступность, участников цепи,
-                  реальные сроки и готовность поставки к отгрузке.
+                  Работаем с производителями и торговыми партнёрами, помогая
+                  компаниям России и стран СНГ выстраивать новые каналы поставок
+                  через Турцию.
                 </p>
               </div>
 
               <div className="grid gap-x-8 gap-y-10 sm:grid-cols-2">
                 {[
                   [
-                    "Собственная инфраструктура",
-                    "Собственные складские мощности в Турции и Англии.",
+                    "Прямой доступ",
+                    "Работаем с действующими фабриками и производственными предприятиями.",
                   ],
                   [
-                    "Проверка производителя",
-                    "Работаем только с действующими фабриками и подтверждёнными поставщиками.",
+                    "Подбор под задачу",
+                    "Подбираем производителя под конкретный формат запроса и объем работы.",
                   ],
                   [
-                    "Прозрачная цепь",
-                    "Понимаем участников и этапы поставки без лишних скрытых звеньев.",
+                    "Логистика",
+                    "Организуем поставки между Турцией и Россией через проверенные маршруты.",
                   ],
                   [
-                    "Контроль отгрузки",
-                    "Отслеживаем процесс до момента отправки и передачи груза.",
+                    "Конфиденциальность",
+                    "Рассматриваем запросы индивидуально и работаем только по деловым обращениям.",
                   ],
                 ].map(([title, text]) => (
                   <div key={title} className="border-l border-white/10 pl-5">
@@ -295,7 +274,7 @@ export default function RussiaSourcingLandingPage() {
               <div className="flex items-center gap-6 tracking-[0.12em] text-[11px] uppercase">
                 <span>Находимся в Турции</span>
                 <span className="opacity-40">•</span>
-                <span>на рынке с 2020 года</span>
+                <span>Работаем с 2020 года</span>
               </div>
             </div>
           </section>
@@ -317,12 +296,12 @@ export default function RussiaSourcingLandingPage() {
               <div className="mt-14 grid gap-8 md:grid-cols-3">
                 {[
                   [
-                    "01",
+                    "01 >",
                     "Запрос",
-                    "Вы отправляете краткое описание запроса, формата сотрудничества и ожидаемого объема.",
+                    "Вы отправляете краткое описание продукта / спецификаций, желаемого производителя и объема.",
                   ],
                   [
-                    "02",
+                    "02 >",
                     "Подбор фабрики",
                     "Мы подбираем производителя и выстраиваем рабочую схему поставки.",
                   ],
@@ -355,8 +334,8 @@ export default function RussiaSourcingLandingPage() {
               </h2>
 
               <p className="mt-6 text-lg leading-8 text-white/58">
-                Работаем с оригинальными и аналоговыми позициями европейских и
-                турецких производителей (SKF, Bosch, ifm, WIKA и др.) через
+                Как оператор поставок работаем с оригинальными и аналоговыми  OEM позициями европейских и
+                турецких производителей (SKF, Bosch, ifm, WIKA и др. ) через
                 проверенные каналы поставок.
               </p>
             </div>
@@ -364,7 +343,7 @@ export default function RussiaSourcingLandingPage() {
             <div className="mt-14 grid gap-5 md:grid-cols-2">
               {[
                 {
-                  title: "Автомобильные компоненты",
+                  title: "1. Автомобильные компоненты",
                   tint: "rgba(255,180,80,0.045)",
                   border: "rgba(255,180,80,0.14)",
                   items: [
@@ -374,7 +353,7 @@ export default function RussiaSourcingLandingPage() {
                   ],
                 },
                 {
-                  title: "Промышленные компоненты",
+                  title: "2. Промышленные компоненты",
                   tint: "rgba(80,120,255,0.05)",
                   border: "rgba(80,120,255,0.16)",
                   items: [
@@ -384,7 +363,7 @@ export default function RussiaSourcingLandingPage() {
                   ],
                 },
                 {
-                  title: "Строительная химия",
+                  title: "3. Строительная химия",
                   tint: "rgba(120,200,140,0.045)",
                   border: "rgba(120,200,140,0.14)",
                   items: [
@@ -394,7 +373,7 @@ export default function RussiaSourcingLandingPage() {
                   ],
                 },
                 {
-                  title: "Механические узлы",
+                  title: "4. Механические узлы",
                   tint: "rgba(200,200,200,0.035)",
                   border: "rgba(255,255,255,0.12)",
                   items: [
@@ -404,7 +383,7 @@ export default function RussiaSourcingLandingPage() {
                   ],
                 },
                 {
-                  title: "Индивидуальные поставки",
+                  title: "5. Индивидуальные поставки по запросу",
                   tint: "rgba(180,140,255,0.045)",
                   border: "rgba(180,140,255,0.14)",
                   items: [
@@ -445,12 +424,12 @@ export default function RussiaSourcingLandingPage() {
                 Оставьте запрос — проверим наличие и предложим решение.
               </p>
 
-              <a
-                href="#request"
-                className="mt-6 inline-flex items-center justify-center rounded-2xl border border-white/20 px-6 py-3 text-sm font-medium text-white/80 transition duration-200 hover:border-white/40 hover:bg-white/[0.04] hover:text-white"
-              >
-                Отправить запрос
-              </a>
+             <a
+  href="#request"
+  className="mt-6 inline-flex items-center justify-center rounded-2xl border border-white/20 px-6 py-3 text-sm font-medium text-white/80 transition duration-200 hover:border-white/40 hover:text-white hover:bg-white/[0.04]"
+>
+  Получить предложение
+</a>
             </div>
           </section>
 
@@ -469,26 +448,23 @@ export default function RussiaSourcingLandingPage() {
 
                 <div className="relative">
                   <h2 className="mt-4 text-[28px] font-medium tracking-[-0.04em] text-white md:text-[36px]">
-                    Решение задачи, а не просто поставка
+                    Сильная производственная база и удобная логистика
                   </h2>
 
                   <div className="mt-10 grid gap-8 sm:grid-cols-2">
                     {[
                       [
-                        "Подбор под запрос",
-                        "Подбираем производителя под конкретные параметры, а не только из готового списка.",
+                        "Развитая база",
+                        "Свои складские помещения в Турции и Англии и опыт работы с экспортными поставками.",
                       ],
                       [
-                        "Оптимизация стоимости",
-                        "Ищем баланс между ценой, сроками и стабильностью поставки.",
+                        "Гибкость",
+                        "Возможность выстраивать формат сотрудничества под конкретную задачу.",
                       ],
+                      ["Конфиденциальность", "Мы не разглашаем детали сделок и контрагентов."],
                       [
-                        "Формат работы",
-                        "Выстраиваем схему: тестовая партия, регулярные поставки или точечный дефицит.",
-                      ],
-                      [
-                        "Скорость реакции",
-                        "Быстро даём ответ по доступности, срокам и реальным возможностям поставки.",
+                        "Цена",
+                        "Конкурентная стоимость при сохранении делового уровня исполнения.",
                       ],
                     ].map(([title, text]) => (
                       <div key={title} className="border-l border-white/10 pl-4">
@@ -514,7 +490,7 @@ export default function RussiaSourcingLandingPage() {
                   маршруты и работаем только по реальным деловым запросам.
                 </p>
                 <div className="mt-10 border-t border-white/10 pt-5 text-sm leading-6 text-white/50">
-                  Минимальные объемы поставок обсуждаются индивидуально.
+                  Каналы поставок обсуждаются индивидуально.
                 </div>
               </div>
             </div>
@@ -639,7 +615,7 @@ export default function RussiaSourcingLandingPage() {
                         name="message"
                         rows={5}
                         className="w-full border border-white/10 bg-white/[0.03] px-4 py-3 text-white outline-none transition duration-200 placeholder:text-white/25 focus:border-[#E7E2D6]/30 focus:bg-white/[0.05]"
-                        placeholder="Опишите ваш запрос"
+                        placeholder="Опишите ваш запрос. Укажите WhatsApp / телефон для более быстрого ответа"
                       />
                     </div>
 
@@ -652,9 +628,9 @@ export default function RussiaSourcingLandingPage() {
                     </button>
 
                     {formStatus === "success" ? (
-                      <div className="rounded-xl border border-green-500/20 bg-green-500/10 px-4 py-3 text-center text-sm text-green-400">
-                        ✅ Заявка отправлена. Мы свяжемся с вами после проверки запроса.
-                      </div>
+                     <div className="text-center text-sm text-green-400 bg-green-500/10 border border-green-500/20 px-4 py-3 rounded-xl">
+  ✅ Заявка отправлена. Мы свяжемся с вами после проверки запроса.
+</div>
                     ) : null}
 
                     {formStatus === "error" ? (
@@ -665,8 +641,8 @@ export default function RussiaSourcingLandingPage() {
                   </form>
 
                   <div className="mt-5 text-center text-sm text-white/40">
-                    Заявки рассматриваются индивидуально. Минимальные объемы
-                    обсуждаются после запроса.
+                    Заявки рассматриваются индивидуально. Стоимость и варианты поставки
+                    обсуждаются после обработки запроса.
                   </div>
                 </div>
               </div>
@@ -674,7 +650,7 @@ export default function RussiaSourcingLandingPage() {
           </section>
 
           <footer className="border-t border-white/10 py-8 text-center text-[11px] uppercase tracking-[0.2em] text-white/30">
-            ATU Sourcing · Operating from Türkiye
+            ATU Sourcing | Оператор поставок · Operating from Türkiye
           </footer>
         </div>
       </div>
