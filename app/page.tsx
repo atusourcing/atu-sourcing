@@ -61,10 +61,14 @@ export default function RussiaSourcingLandingPage() {
         <div className="relative mx-auto max-w-6xl px-6 py-8">
           <div className="flex items-center justify-between">
             <div>
-              <div className="text-[12px] font-semibold uppercase tracking-[0.32em] text-white/60">
-                ATU TRADE | Оператор поставок
-              </div>
-              <div className="mt-2 text-[10px] uppercase tracking-[0.4em] text-white/35">
+              <div className="text-[12px] font-semibold uppercase tracking-[0.32em]">
+  <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#C9A96A] to-[#E5C27A]">
+    ATU TRADE
+  </span>
+  <span className="text-white/40"> | Оператор поставок</span>
+</div>
+
+<div className="mt-2 text-[10px] uppercase tracking-[0.4em] text-white/35">
                 <span className="text-white/50">RU</span>
                 <span className="text-blue-400/70">SS</span>
                 <span className="text-red-400/70">IA</span>
