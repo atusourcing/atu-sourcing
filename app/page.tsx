@@ -62,7 +62,7 @@ export default function RussiaSourcingLandingPage() {
           <div className="flex items-center justify-between">
             <div>
               <div className="text-[12px] font-semibold uppercase tracking-[0.32em] text-white/60">
-                ATU SOURCING | Оператор поставок
+                ATU TRADE | Оператор поставок
               </div>
               <div className="mt-2 text-[10px] uppercase tracking-[0.4em] text-white/35">
                 <span className="text-white/50">RU</span>
@@ -650,7 +650,7 @@ export default function RussiaSourcingLandingPage() {
           </section>
 
           <footer className="border-t border-white/10 py-8 text-center text-[11px] uppercase tracking-[0.2em] text-white/30">
-            ATU Sourcing | Оператор поставок · Operating from Türkiye
+            ATU TRADE | Оператор поставок · Operating from Türkiye
           </footer>
         </div>
       </div>
