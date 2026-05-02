@@ -619,7 +619,7 @@ export default function RussiaSourcingLandingPage() {
                         name="message"
                         rows={5}
                         className="w-full border border-white/10 bg-white/[0.03] px-4 py-3 text-white outline-none transition duration-200 placeholder:text-white/25 focus:border-[#E7E2D6]/30 focus:bg-white/[0.05]"
-                        placeholder="Кратко опишите задачу (продукт и объем). Укажите контакт для связи (WhatsApp / телефон)."
+                        placeholder="Кратко опишите задачу (продукт и объем ). Укажите контакт для связи (WhatsApp / телефон)."
                       />
                     </div>
 
