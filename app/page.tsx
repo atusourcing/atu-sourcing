@@ -95,13 +95,13 @@ export default function RussiaSourcingLandingPage() {
               </h1>
 
               <p className="mt-7 max-w-xl text-lg leading-8 text-white/72 md:text-[21px]">
-                Работаем с производителями и международными поставщиками,
+                Работаем с производителями и международными поставщиками с 2020 года, 
                 организуя поставки для компаний России и стран СНГ.
               </p>
 
               <p className="mt-4 max-w-xl text-[15px] leading-7 text-white/42">
                 Доступ к заводам-производителям и международным поставщикам.
-                Подбор поставщика под ключ. Сопровождение поставки до отгрузки.
+                Подбор поставщика под ключ. Выстраиваем логистическую схему и сопровождаем поставку до отгрузки.
               </p>
 
               <div className="mt-10 flex flex-col gap-4 sm:flex-row">
@@ -124,7 +124,7 @@ export default function RussiaSourcingLandingPage() {
                 {[
                   [
                     "Прямой доступ",
-                    "Работаем с действующими фабриками и производственными предприятиями.",
+                    "Работаем с действующими фабриками и дистрибьюторами.",
                   ],
                   ["Маршруты поставки", "Выстраиваем рабочую логистическую схему."],
                   [
@@ -234,7 +234,7 @@ export default function RussiaSourcingLandingPage() {
                   О нас
                 </div>
                 <h2 className="mt-4 text-[28px] font-medium tracking-[-0.04em] text-white md:text-[36px]">
-                  Глубокий анализ и системный подход
+                  Работаем как оператор поставок
                 </h2>
                 <p className="mt-6 max-w-xl text-lg leading-8 text-white/60">
                   Работаем с производителями и торговыми партнёрами, помогая
@@ -247,11 +247,11 @@ export default function RussiaSourcingLandingPage() {
                 {[
                   [
                     "Прямой доступ",
-                    "Работаем с действующими фабриками и производственными предприятиями.",
+                    "Работаем напрямую с действующими производственными предприятиями.",
                   ],
                   [
                     "Подбор под задачу",
-                    "Подбираем производителя под конкретный формат запроса и объем работы.",
+                    "Подбираем производителя под конкретный запрос и объем поставки.",
                   ],
                   [
                     "Логистика",
@@ -276,9 +276,9 @@ export default function RussiaSourcingLandingPage() {
           <section className="border-y border-white/10 bg-[#151618]/68 backdrop-blur-[1px]">
             <div className="mx-auto max-w-6xl px-6 py-6 text-sm text-white/55">
               <div className="flex items-center gap-6 tracking-[0.12em] text-[11px] uppercase">
-                <span>Находимся в Турции</span>
+                <span>РАБОТАЕМ С 2020 ГОДА</span>
                 <span className="opacity-40">•</span>
-                <span>Работаем с 2020 года</span>
+                <span>СКЛАДЫ В ТУРЦИИ И АНГЛИИ</span>
               </div>
             </div>
           </section>
@@ -338,9 +338,9 @@ export default function RussiaSourcingLandingPage() {
               </h2>
 
               <p className="mt-6 text-lg leading-8 text-white/58">
-                Как оператор поставок работаем с оригинальными и аналоговыми  OEM позициями европейских и
-                турецких производителей (SKF, Bosch, ifm, WIKA и др. ) через
-                проверенные каналы поставок.
+                Работаем с оригинальными и аналоговыми OEM-компонентами европейских 
+                и турецких производителей (SKF, Bosch, ifm, WIKA и др. ) 
+                через проверенные каналы поставок.
               </p>
             </div>
 
@@ -393,7 +393,7 @@ export default function RussiaSourcingLandingPage() {
                   items: [
                     "Редкие и нестандартные позиции",
                     "Поиск под конкретный запрос",
-                    "Проверка доступности и сроков",
+                    "Проверка доступности и сроков поставки",
                   ],
                 },
               ].map((sector) => (
@@ -452,7 +452,7 @@ export default function RussiaSourcingLandingPage() {
 
                 <div className="relative">
                   <h2 className="mt-4 text-[28px] font-medium tracking-[-0.04em] text-white md:text-[36px]">
-                    Сильная производственная база и удобная логистика
+                    Сильная производственная база и выстроенная  логистика
                   </h2>
 
                   <div className="mt-10 grid gap-8 sm:grid-cols-2">
@@ -619,7 +619,7 @@ export default function RussiaSourcingLandingPage() {
                         name="message"
                         rows={5}
                         className="w-full border border-white/10 bg-white/[0.03] px-4 py-3 text-white outline-none transition duration-200 placeholder:text-white/25 focus:border-[#E7E2D6]/30 focus:bg-white/[0.05]"
-                        placeholder="Опишите ваш запрос. Укажите WhatsApp / телефон для более быстрого ответа"
+                        placeholder="Кратко опишите задачу, продукт или объем. Укажите контакт для связи (WhatsApp / телефон)."
                       />
                     </div>
 
@@ -628,7 +628,7 @@ export default function RussiaSourcingLandingPage() {
                       disabled={formStatus === "sending"}
                       className="inline-flex w-full items-center justify-center rounded-2xl border border-[#E7E2D6]/25 bg-[#E7E2D6] px-6 py-4 text-sm font-medium text-[#18191B] transition duration-200 hover:bg-white hover:brightness-110 hover:shadow-[0_0_0_1px_rgba(255,255,255,0.45),0_0_28px_rgba(255,255,255,0.18)] disabled:cursor-not-allowed disabled:opacity-60"
                     >
-                      {formStatus === "sending" ? "Отправка..." : "Отправить заявку"}
+                      {formStatus === "sending" ? "Отправка..." : "Отправить запрос на поставку"}
                     </button>
 
                     {formStatus === "success" ? (
@@ -645,8 +645,8 @@ export default function RussiaSourcingLandingPage() {
                   </form>
 
                   <div className="mt-5 text-center text-sm text-white/40">
-                    Заявки рассматриваются индивидуально. Стоимость и варианты поставки
-                    обсуждаются после обработки запроса.
+                    Каждый запрос рассматривается индивидуально. 
+                    Стоимость и условия поставки формируются после обработки заявки.
                   </div>
                 </div>
               </div>
